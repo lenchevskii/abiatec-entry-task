@@ -1,0 +1,17 @@
+{
+  "name": "task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/source/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Dzmitry Liancheuski",
+  "license": "MIT",
+  "dependencies": {
+    "immutable": "^4.0.0-rc.12",
+    "lazy.js": "^0.5.1",
+    "lodash": "^4.17.20",
+    "mori": "^0.3.2"
+  }
+}
