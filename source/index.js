@@ -22,13 +22,8 @@ const compare             = (x, y)    => y.reduce((acc, z) => acc && x.includes(
 
 const orderedCompare      = (x, y)    => y.map((e, i) => x.slice(i).includes(e)).reduce((acc, z) => acc && z, true)     // abiatec task
                           
-                          const first = new Promise((rs) => IO(() => trace('3000 Timer'))
-                                                              .takeRight(IO(() => setTimeout(() => trace('3000 timer is over.'), 3000)))
+                          const first = new Promise((rs) => (IO(() => setTimeout(() => rs('Obtained data.'), 3000)))
                                                               .run()
                                                     )
-
-                          const second = first.then(IO(() => trace('3000 Timer'))
-                                                              .takeRight(IO(() => setTimeout(() => trace('3000 timer is over.'), 3000)))
-                                                              .run()
-                                                          )
                           
+                          first.then((x) => trace(x))
