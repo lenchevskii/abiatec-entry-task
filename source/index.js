@@ -12,6 +12,8 @@ const { IO
       , Return
       , Identity
       }                   = require('monet')
+      
+const { getRifle }        = require('./inner-index.js')
 
 const trace               = (x)       => { console.log(x); return x }
 
@@ -23,11 +25,11 @@ const compare             = (x, y)    => y.reduce((acc, z) => acc && x.includes(
 
 const orderedCompare      = (x, y)    => y.map((e, i) => x.slice(i).includes(e)).reduce((acc, z) => acc && z, true)     // abiatec task
                           
-                          const first = new Promise(
-                            (rs) => IO(() => setTimeout(() => rs('Obtained data.'), 3000))
-                                                              // .takeRight(IO(() => setTimeout(() => rs('Obtained data.'), 3000)))
-                                                              .run()
-                                                    )
+                          // const first = new Promise(
+                          //   (rs) => IO(() => setTimeout(() => rs('Obtained data.'), 3000))
+                          //                                     // .takeRight(IO(() => setTimeout(() => rs('Obtained data.'), 3000)))
+                          //                                     .run()
+                          //                           )
                           
                           // first.then((x) => trace(x))
 
@@ -69,10 +71,26 @@ const orderedCompare      = (x, y)    => y.map((e, i) => x.slice(i).includes(e))
                             (collection) => 
                               [...collection].sort((a, b) => Number(a.time.slice(0, 2)) - Number(b.time.slice(0, 2)))
 
-                          // trace(sorted)
-
                           const sortedRam = R.curry(R.sort)((a, b) => Number(a.time.slice(0, 2)) - Number(b.time.slice(0, 2)))
 
-                          timerWrap(sorted, arr)
+                          const consistentPromise = new Promise(
+                            (resolve, reject) => {
+                              setTimeout(() => console.log('This is first log'), 1000)
+                              setTimeout(() => console.log('This is second log'), 2000)
+                              console.log(setTimeout(() => resolve('This is third log'), 3000))
+                              // console.log(resolve('This is fourth log'))
+                              setTimeout(() => console.log('This is sixth log'), 4000)
+                            }
+                          )
+
+                          trace(consistentPromise)
+
+                          // const resolvedPromise = await new Promise(resolve => resolve('Fire in the hole!'))
+
+                          // const attachedInfo = (async () => await resolvedPromise)()
+
+                          // const rifle = await getRifle()
+
+                          // trace(rifle)
 
 module.exports = { trace }

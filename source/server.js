@@ -4,13 +4,13 @@ const { IO } = require('monet')
 
 const {
   trace,
-  solved,
-  first
+  attachedInfo,
+  resolvedPromise
 } = require('./index')
 
 const app = EXPRESS()
 
 app.listen(
   3000,
-  async () => trace(await solved())
+  async () => trace(await resolvedPromise)
 )
